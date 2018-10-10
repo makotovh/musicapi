@@ -23,7 +23,7 @@
 hs_err_pid*
 
 .idea/
-reporter-api.iml
+musicapi.iml
 
 # Maven
 target/
