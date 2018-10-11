@@ -1,5 +1,6 @@
 package se.zeroplusx.musicapi.service;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import se.zeroplusx.musicapi.dto.ArtistDto;
@@ -17,6 +18,7 @@ public class DiscogsService {
 
     private static final String URL_SITE = "https://www.discogs.com/artist/";
 
+    @Cacheable("profiles")
     public String getProfileFormArtist(ArtistDto artist) {
         RelationDto relationDiscogs = artist.getRelations()
                 .stream()

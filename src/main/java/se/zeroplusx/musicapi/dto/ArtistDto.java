@@ -1,9 +1,12 @@
 package se.zeroplusx.musicapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +22,17 @@ public class ArtistDto implements Serializable {
     @JsonAlias("release-groups")
     private List<AlbumsDto> albums;
 
-    //@JsonFilter
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     private List<RelationDto> relations;
+
+    @JsonIgnore
+    public List<RelationDto> getRelations() {
+        return relations;
+    }
+
+    @JsonProperty
+    public void setRelations(List<RelationDto> relations) {
+        this.relations = relations;
+    }
 }

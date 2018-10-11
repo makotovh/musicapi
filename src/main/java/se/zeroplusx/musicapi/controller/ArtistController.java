@@ -23,8 +23,9 @@ public class ArtistController {
     @GetMapping("/{mbid}")
     public ArtistDto test(@PathVariable String mbid) {
 
-        ArtistDto artist = musicBrainzService.getArtist(mbid, "url-rels+release-groups");
+        ArtistDto artist = musicBrainzService.getArtist(mbid);
         artist.setDescription(discogsService.getProfileFormArtist(artist));
+        //ArtistDto artist = new ArtistDto();
         return artist;
     }
 }
