@@ -10,4 +10,5 @@ public class RelationDto implements Serializable {
     private String type;
 
     private RelationUrlDto url;
+
 }

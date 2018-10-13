@@ -9,7 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 public class MusicapiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MusicapiApplication.class, args);
+	    SpringApplication.run(MusicapiApplication.class, args);
 	}
 
 }

@@ -13,8 +13,6 @@ public class AlbumsDto implements Serializable {
 
     private String title;
 
-    //private String image;
-
     public String getImage() {
         return String.format(URL_PATTERN, this.id);
     }
