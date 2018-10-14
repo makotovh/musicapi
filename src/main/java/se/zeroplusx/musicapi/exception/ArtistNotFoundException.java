@@ -1,8 +1,6 @@
 package se.zeroplusx.musicapi.exception;
 
-import org.springframework.web.reactive.function.client.WebClientException;
-
-public class ArtistNotFoundException extends WebClientException {
+public class ArtistNotFoundException extends MusicApiException {
 
     public ArtistNotFoundException(String msg) {
         super(msg);

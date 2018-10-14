@@ -1,8 +1,6 @@
 package se.zeroplusx.musicapi.exception;
 
-import org.springframework.web.reactive.function.client.WebClientException;
-
-public class ProfileNotFound extends WebClientException {
+public class ProfileNotFound extends MusicApiException {
 
     public ProfileNotFound(String msg) {
         super(msg);

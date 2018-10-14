@@ -1,8 +1,6 @@
 package se.zeroplusx.musicapi.exception;
 
-import org.springframework.web.reactive.function.client.WebClientException;
-
-public class MusicBrainzServiceException extends WebClientException {
+public class MusicBrainzServiceException extends MusicApiException {
 
     public MusicBrainzServiceException(String msg) {
         super(msg);

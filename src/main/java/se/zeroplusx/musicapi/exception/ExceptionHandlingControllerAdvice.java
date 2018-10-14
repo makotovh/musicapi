@@ -35,7 +35,9 @@ public class ExceptionHandlingControllerAdvice extends ResponseEntityExceptionHa
         String message = ex.getMessage();
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
             request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
-            message = "Internal Error";
+            if (!(ex instanceof MusicApiException)) {
+                message = "Internal Error";
+            }
         }
         return new ResponseEntity<>(new ErrorDto(status.value(), message), headers, status);
     }

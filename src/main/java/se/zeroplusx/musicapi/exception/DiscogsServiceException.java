@@ -1,8 +1,6 @@
 package se.zeroplusx.musicapi.exception;
 
-import org.springframework.web.reactive.function.client.WebClientException;
-
-public class DiscogsServiceException extends WebClientException {
+public class DiscogsServiceException extends MusicApiException {
     public DiscogsServiceException(String msg) {
         super(msg);
     }
