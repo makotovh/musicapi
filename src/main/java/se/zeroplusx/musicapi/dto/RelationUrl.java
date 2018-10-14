@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RelationUrlDto implements Serializable {
+public class RelationUrl implements Serializable {
 
     private String resource;
 }

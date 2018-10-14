@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import se.zeroplusx.musicapi.dto.ArtistDto;
-import se.zeroplusx.musicapi.dto.RelationDto;
+import se.zeroplusx.musicapi.dto.Artist;
+import se.zeroplusx.musicapi.dto.Relation;
 import se.zeroplusx.musicapi.exception.DiscogsServiceException;
 import se.zeroplusx.musicapi.exception.ProfileNotFound;
 
@@ -26,10 +26,10 @@ public class DiscogsService {
 
 
     @Cacheable("profiles")
-    public Mono<String> getProfileFormArtist(ArtistDto artistDto) {
-        Preconditions.checkArgument(artistDto != null, "The artist must be informed");
+    public Mono<String> getProfileFormArtist(Artist artist) {
+        Preconditions.checkArgument(artist != null, "The artist must be informed");
         return webClient.get()
-                .uri("/artists/{discogsId}", getDiscogsId(artistDto))
+                .uri("/artists/{discogsId}", getDiscogsId(artist))
                 .retrieve()
                 .onStatus(HttpStatus::isError, clientResponse -> {
                     if (clientResponse.statusCode().value() == 404) {
@@ -46,11 +46,11 @@ public class DiscogsService {
     }
 
 
-    private String getDiscogsId(ArtistDto artistDto) {
-        RelationDto discogsRelation = artistDto.getRelations()
+    private String getDiscogsId(Artist artist) {
+        Relation discogsRelation = artist.getRelations()
                 .stream()
-                .filter(relationDto -> {
-                    return DISCOGS_TYPE.equals(relationDto.getType());
+                .filter(relation -> {
+                    return DISCOGS_TYPE.equals(relation.getType());
                 })
                 .findFirst()
                 .get();

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import se.zeroplusx.musicapi.dto.ArtistDto;
+import se.zeroplusx.musicapi.dto.Artist;
 import se.zeroplusx.musicapi.exception.ArtistNotFoundException;
 import se.zeroplusx.musicapi.exception.MusicBrainzServiceException;
 
@@ -21,7 +21,7 @@ public class MusicBrainzService {
     private final WebClient wcMusicBrainz = WebClient.create(MUSIC_BRAINZ_URL);
 
     @Cacheable("artistDtos")
-    public Mono<ArtistDto> getArtist(String mbid) {
+    public Mono<Artist> getArtist(String mbid) {
         Preconditions.checkArgument(!StringUtils.isEmpty(mbid), "The MBID must be informed");
         return wcMusicBrainz.get()
                 .uri("/ws/2/artist/{mbid}?fmt=json&inc=url-rels+release-groups", mbid)
@@ -34,7 +34,7 @@ public class MusicBrainzService {
                         return Mono.error(new MusicBrainzServiceException("Error on connect to MusicBrainz api"));
                     }
                 })
-                .bodyToMono(ArtistDto.class)
+                .bodyToMono(Artist.class)
                 .cache();
     }
 

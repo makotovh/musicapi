@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-import se.zeroplusx.musicapi.dto.ArtistDto;
+import se.zeroplusx.musicapi.dto.Artist;
 import se.zeroplusx.musicapi.service.DiscogsService;
 import se.zeroplusx.musicapi.service.MusicBrainzService;
 
@@ -22,13 +22,13 @@ public class ArtistController {
     }
 
     @GetMapping("/{mbid}")
-    public Mono<ArtistDto> getInfo(@PathVariable String mbid) {
+    public Mono<Artist> getInfo(@PathVariable String mbid) {
         return musicBrainzService.getArtist(mbid)
-                .flatMap(artistDto -> {
-                    return discogsService.getProfileFormArtist(artistDto)
+                .flatMap(artist -> {
+                    return discogsService.getProfileFormArtist(artist)
                             .map(s -> {
-                                artistDto.setDescription(s);
-                                return artistDto;
+                                artist.setDescription(s);
+                                return artist;
                             });
                 }).cache();
     }

@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class ArtistDto implements Serializable {
+public class Artist implements Serializable {
 
     @JsonAlias("id")
     private String mbid;
@@ -20,19 +20,19 @@ public class ArtistDto implements Serializable {
     private String description;
 
     @JsonAlias("release-groups")
-    private List<AlbumsDto> albums;
+    private List<Album> albums;
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    private List<RelationDto> relations;
+    private List<Relation> relations;
 
     @JsonIgnore
-    public List<RelationDto> getRelations() {
+    public List<Relation> getRelations() {
         return relations;
     }
 
     @JsonProperty
-    public void setRelations(List<RelationDto> relations) {
+    public void setRelations(List<Relation> relations) {
         this.relations = relations;
     }
 }

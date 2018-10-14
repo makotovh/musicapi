@@ -5,10 +5,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class RelationDto implements Serializable {
+public class Relation implements Serializable {
 
     private String type;
 
-    private RelationUrlDto url;
+    private RelationUrl url;
 
 }

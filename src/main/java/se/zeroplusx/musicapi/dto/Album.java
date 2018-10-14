@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class AlbumsDto implements Serializable {
+public class Album implements Serializable {
 
     private static final String URL_PATTERN = "http://coverartarchive.org/release-group/%s/front";
 
