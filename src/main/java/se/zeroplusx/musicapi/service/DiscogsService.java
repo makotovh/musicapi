@@ -1,5 +1,6 @@
 package se.zeroplusx.musicapi.service;
 
+import com.google.common.base.Preconditions;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class DiscogsService {
 
     @Cacheable("profiles")
     public Mono<String> getProfileFormArtist(ArtistDto artistDto) {
+        Preconditions.checkArgument(artistDto != null, "The artist must be informed");
         return webClient.get()
                 .uri("/artists/{discogsId}", getDiscogsId(artistDto))
                 .retrieve()

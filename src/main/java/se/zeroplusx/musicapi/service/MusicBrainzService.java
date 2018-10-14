@@ -1,9 +1,11 @@
 package se.zeroplusx.musicapi.service;
 
+import com.google.common.base.Preconditions;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import se.zeroplusx.musicapi.dto.ArtistDto;
@@ -20,7 +22,8 @@ public class MusicBrainzService {
 
     @Cacheable("artistDtos")
     public Mono<ArtistDto> getArtist(String mbid) {
-       return wcMusicBrainz.get()
+        Preconditions.checkArgument(!StringUtils.isEmpty(mbid), "The MBID must be informed");
+        return wcMusicBrainz.get()
                 .uri("/ws/2/artist/{mbid}?fmt=json&inc=url-rels+release-groups", mbid)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
