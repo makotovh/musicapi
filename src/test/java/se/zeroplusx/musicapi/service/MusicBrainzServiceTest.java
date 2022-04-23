@@ -1,22 +1,23 @@
 package se.zeroplusx.musicapi.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MusicBrainzServiceTest {
+@ExtendWith(MockitoExtension.class)
+class MusicBrainzServiceTest {
 
     private MusicBrainzService musicBrainzService = new MusicBrainzService();
 
-    @Test(expected = Exception.class)
-    public void testShouldReturnErrorWhenPassedANullMBID() {
-        musicBrainzService.getArtist(null);
+    @Test
+    void testShouldReturnErrorWhenPassedANullMBID() {
+        Assertions.assertThrows(Exception.class, () -> musicBrainzService.getArtist(null));
     }
 
-    @Test(expected = Exception.class)
-    public void testShouldReturnErrorWhenPassedAEmptyMBID() {
-        musicBrainzService.getArtist("");
+    @Test
+    void testShouldReturnErrorWhenPassedAEmptyMBID() {
+        Assertions.assertThrows(Exception.class, () -> musicBrainzService.getArtist(""));
     }
 
 }

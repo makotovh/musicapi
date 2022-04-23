@@ -1,17 +1,17 @@
 package se.zeroplusx.musicapi;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import se.zeroplusx.musicapi.dto.Artist;
 
-@RunWith(SpringRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class RequestsTest {
+class RequestsTest {
 
     private static final String CHARLIE_BROWN_JR_MBID = "29b550f2-04a3-4733-b6f5-4e347fac7e11";
     private static final String INVALID_MBID = "29b550f2-04a3-4733-b6f5-4e347fac7e12";
@@ -20,7 +20,7 @@ public class RequestsTest {
     private WebTestClient webClient;
 
     @Test
-    public void getArtist() {
+    void getArtist() {
         webClient.get()
                 .uri("/artists/{mbid}", CHARLIE_BROWN_JR_MBID)
                 .accept(MediaType.APPLICATION_JSON)
@@ -30,7 +30,7 @@ public class RequestsTest {
     }
 
     @Test
-    public void shouldReturn404WhenDontFoundArtist() {
+    void shouldReturn404WhenDontFoundArtist() {
         webClient.get()
                 .uri("/artists/{mbid}", INVALID_MBID)
                 .accept(MediaType.APPLICATION_JSON)

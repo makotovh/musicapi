@@ -1,16 +1,17 @@
 package se.zeroplusx.musicapi.service;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DiscogsServiceTest {
+@ExtendWith(MockitoExtension.class)
+class DiscogsServiceTest {
 
     private DiscogsService discogsService = new DiscogsService();
 
-    @Test(expected = Exception.class)
-    public void testShouldReturnErrorWhenPassedANullArtist() {
-        discogsService.getProfileFormArtist(null);
+    @Test
+    void testShouldReturnErrorWhenPassedANullArtist() {
+        Assertions.assertThrows(Exception.class, () -> discogsService.getProfileFormArtist(null));
     }
 }
